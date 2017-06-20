@@ -14,8 +14,7 @@
 #include <Sparki.h> // include the sparki library
 
 #define BASESPEED 100
-
-#define PGAIN  0.1
+#define PGAIN  1
 
 int speedLeft;
 int speedRight;
@@ -27,11 +26,12 @@ void setup()
 }
 
 void loop() {
+  
   int lineLeft   = sparki.lineLeft();   // measure the left IR sensor
   int lineCenter = sparki.lineCenter(); // measure the center IR sensor
   int lineRight  = sparki.lineRight();  // measure the right IR sensor
 
-  int lineDiff = (int)((float)(lineLeft - lineRight) * PGAIN);
+  int lineDiff = (int)((float)(lineRight - lineLeft) * PGAIN);
 
   speedRight = BASESPEED + lineDiff;
   if (speedRight < 0)
